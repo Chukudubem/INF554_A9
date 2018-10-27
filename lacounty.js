@@ -3,6 +3,7 @@ function county_map(files){
 	var data = files[0];
     var width = 800;
     var height = 1300;
+    var margin = { top: 80, left: 50, bottom: 50, right: 50 };
     var svg = d3.select('#lacounty')
                 .append('svg')
                 .attr('height', height)
@@ -92,13 +93,14 @@ function county_map(files){
     //Map Title
     svg.append("text")
         .attr("class", "label")
-        .attr("x", 1000)
-        .attr("y", 1460)
-        .attr("dy", ".35em")
-        .style("font-size", "30px")
+        .attr("x", 460)
+        .attr("y", 60)
+        //.attr("dy", ".35em")
+        .style("font-size", "24px")
         .style("font-weight", "bold")
         .style("text-anchor", "middle")
-        .text("Choropleth Map for the Number of Parks per Square Mile in Los Angeles");
+        //.style("opacity", 0.5)
+        .text("DOT MAP SHOWING PARKS IN LOS ANGELES COUNTY")        ;
 
      
 }

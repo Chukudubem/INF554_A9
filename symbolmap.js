@@ -2,13 +2,11 @@ function proportional_symbol(data) {
     var json = data[0]
     var dataset = data[1]
     var margin = { top: 80, left: 50, bottom: 50, right: 50 };
-    var width = 1600;
+    var width = 1200;
     var height= 900;
     var radius = d3.scaleLinear()
                    .domain([0, 100])
                    .range([0, 50]);
-
-        
 
         json.features.forEach(function(d) {
             var result = dataset.filter(function(datum) {
@@ -17,7 +15,6 @@ function proportional_symbol(data) {
            //console.log(result[0])
         d.properties.value = (result[0] !== undefined) ? result[0].value : 0;
         });
-
         
         var svg = d3.select("#symbolmap")
                     .attr("width", width)
@@ -42,8 +39,16 @@ function proportional_symbol(data) {
         labels.data(json.features)
               .enter()
               .append('text')
-              .attr('x', function (d) { return path.centroid(d)[0] - 7; })
-              .attr('y', function (d) { return path.centroid(d)[1]; })
+              .attr("transform", function (d) {
+                //fixing exceptions for centroid
+                if (d.id == "USA") {
+                    return "translate(331,320)"
+                }
+                else if (d.id == "FRA") {
+                    return "translate(587,303)"
+                }
+                return "translate(" + (path.centroid(d)[0] - 7) + "," + (path.centroid(d)[1]+4) + ")";
+            })
               .style("font-size", "10px")
               .style("font-weight", "bold")
               .text(function (d) { if (d.properties.value != 0) return d.id; });
@@ -54,9 +59,16 @@ function proportional_symbol(data) {
         bubbles.data(json.features.sort(function(a, b) { return b.properties.value - a.properties.value; }))
                 .enter()
                 .append("circle")
-                .attr("transform", function(d) {return "translate(" + path.centroid(d) + ")"; })
+                .attr("transform", function(d) {
+                    if (d.id == "USA") {
+                        return "translate(331,320)"
+                    }
+                    else if (d.id == "FRA") {
+                        return "translate(587,303)"
+                    }
+                    return "translate(" + path.centroid(d) + ")"; })
                 .attr("r", function(d) { return radius(d.properties.value); })
-                .style("opacity", .7)
+                .style("opacity", .5)
         //Draw Legend
         legend = svg.append("g")
                     .attr("class", "legend")
@@ -95,7 +107,8 @@ function proportional_symbol(data) {
             .text('100%');
         //Append Map Title
         svg.append('text')
-            .attr('x',450)
+            .attr('class', 'label')
+            .attr('x',100)
             .attr('y',-50)
             .style("font-size", "24px")
             .style("font-weight", "bold")

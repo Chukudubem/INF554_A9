@@ -1,8 +1,8 @@
 function chloropleth_map(data){
     var json = data[0]
     var dataset = data[1]
-    var margin = { top: 80, left: 50, bottom: 50, right: 50 };
-    var width = 1600;
+    var margin = { top: 80, left: 80, bottom: 80, right: 80 };
+    var width = 1200;
     var height= 900;
     var legend_labels = ['none', '1% - 15%', '16% - 30%', '31% - 45%', '46% - 60%', '61% - 75%', '76% - 90%', '> 90%'];
     var legend_band = [0, 10, 16, 31, 46, 61, 76, 91];
@@ -52,10 +52,10 @@ function chloropleth_map(data){
           .append('text')
           .attr("transform", function (d) {
                 if (d.id == "USA") {
-                    return "translate(510,320)"
+                    return "translate(331,320)"
                 }
                 else if (d.id == "FRA") {
-                    return "translate(789,300)"
+                    return "translate(587,303)"
                 }
                 return "translate(" + (path.centroid(d)[0] - 7) + "," + (path.centroid(d)[1]+4) + ")";
             })
@@ -68,8 +68,8 @@ function chloropleth_map(data){
                 .attr("transform", "translate(50,30)");
             g.append("text")
              .attr("class", "caption")
-             .attr("x", 450)
-             .attr("y", -50)
+             .attr('x',100)
+             .attr('y',-50)
              .style("font-size", "24px")
              .style("font-weight", "bold")
              .text('Chloropleth Map Showing Percentage Population of Internet Users in 2014');

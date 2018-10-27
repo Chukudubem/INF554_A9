@@ -4,20 +4,29 @@
 
 <head>
     <script src="node_modules/d3/dist/d3.min.js"></script>
-    <script src="node_modules/d3-queue/build/d3-queue.min.js"></script>
+    <script src="node_modules/bootstrap/dist/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <svg id ="symbolmap" style="background-color: rgb(204, 199, 191)"></svg>
-    <svg id ="chloropleth" style="background-color: rgb(196, 192, 184)"></svg>
-    <svg id ="lacounty" width="1500" height="800" style="background-color: rgb(255, 255, 255)"></svg>
-    
-
+    <div class="container">
+            <div class="jumbotron">
+                <h1> Visualization Using Maps</h1>
+                <h4>Proportional Symbol Map, Chloropleth Map, Dot Map</h4>
+            </div>
+        <p>We use the following maps to visually describe two different information:</p>
+        <p>1. A proportional symbol map showing the percentage of internet users in ten(10) countries in 2014</p>
+        <p>2. A chloropleth map showing the same information as in (1.) (Here the intensity of color is mapped to the percentage)</p>
+        <p>3. A dot map showing the active parks in Los Angeles County</p><br/><br/>
+        <svg id ="symbolmap" style="background-color: rgb(204, 199, 191)"></svg>
+        <svg id ="chloropleth" style="background-color: rgb(196, 192, 184)"></svg><br/><br/>
+        <svg id ="lacounty" width="1000" height="1800" style="background-color: rgb(255, 255, 255)"></svg>
+            
+    </div>
 
     <script src="symbolmap.js"></script>
     <script src="chloropleth.js"></script>
     <script src="lacounty.js"></script>
-
 </body>
 
 </html>
